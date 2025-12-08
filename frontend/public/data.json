@@ -1,0 +1,139 @@
+[
+  {
+    "id": "product-1",
+    "type": "rare",
+    "name": "BarrierFruit",
+    "regularPrice": 17.89,
+    "discountPrice": 10.23,
+    "image": "/mainCardImages/rare.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-2",
+    "type": "legendary",
+    "name": "RubberFruit",
+    "regularPrice": 15.49,
+    "discountPrice": 7.79,
+    "image": "/mainCardImages/legendary.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-3",
+    "type": "uncommon",
+    "name": "IceFruit",
+    "regularPrice": 9.99,
+    "discountPrice": 4.89,
+    "image": "/mainCardImages/uncommon.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-4",
+    "type": "mythical",
+    "name": "SandFruit",
+    "regularPrice": 9.99,
+    "discountPrice": 4.89,
+    "image": "/mainCardImages/mythical.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-5",
+    "type": "common",
+    "name": "BuddhaFruit",
+    "regularPrice": 10.23,
+    "discountPrice": 4.5,
+    "image": "/mainCardImages/common.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-6",
+    "type": "mythical",
+    "name": "SandFruit",
+    "regularPrice": 9.99,
+    "discountPrice": 4.89,
+    "image": "/mainCardImages/mythical.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-7",
+    "type": "rare",
+    "name": "BarrierFruit",
+    "regularPrice": 17.89,
+    "discountPrice": 10.23,
+    "image": "/mainCardImages/rare.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-8",
+    "type": "uncommon",
+    "name": "IceFruit",
+    "regularPrice": 9.99,
+    "discountPrice": 4.89,
+    "image": "/mainCardImages/uncommon.png",
+    "category": "Permanent Fruit",
+    "games_name": "blox-fruits"
+  },
+  {
+    "id": "product-9",
+    "type": "rare",
+    "name": "Combat Warrior Gamepass",
+    "regularPrice": 25.99,
+    "discountPrice": 19.99,
+    "image": "/mainCardImages/rare.png",
+    "category": "Gamepass",
+    "games_name": "combat-warrior"
+  },
+  {
+    "id": "product-10",
+    "type": "legendary",
+    "name": "Aether Crystal",
+    "regularPrice": 45.50,
+    "discountPrice": 35.00,
+    "image": "/mainCardImages/legendary.png",
+    "category": "Aether",
+    "games_name": "combat-warrior"
+  },
+  {
+    "id": "product-11",
+    "type": "common",
+    "name": "Combat Credits",
+    "regularPrice": 12.99,
+    "image": "/mainCardImages/common.png",
+    "category": "Credits",
+    "games_name": "combat-warrior"
+  },
+  {
+    "id": "product-12",
+    "type": "mythical",
+    "name": "Blue Lock Gamepass",
+    "regularPrice": 30.00,
+    "discountPrice": 24.99,
+    "image": "/mainCardImages/mythical.png",
+    "category": "Gamepass",
+    "games_name": "blue-lock-rivals"
+  },
+  {
+    "id": "product-13",
+    "type": "rare",
+    "name": "Style Pack",
+    "regularPrice": 15.99,
+    "image": "/mainCardImages/rare.png",
+    "category": "Styles",
+    "games_name": "blue-lock-rivals"
+  },
+  {
+    "id": "product-14",
+    "type": "uncommon",
+    "name": "Flow Essence",
+    "regularPrice": 8.99,
+    "image": "/mainCardImages/uncommon.png",
+    "category": "Flows",
+    "games_name": "blue-lock-rivals"
+  }
+]

@@ -1,0 +1,20 @@
+.bg-rare{
+    border-radius: 8px;
+    background: var(--rare-bg, radial-gradient(50% 50% at 50% 50%, rgba(107, 202, 74, 0.08) 0%, rgba(224, 255, 213, 0.08) 100%), #0A0A09);
+  }
+  .bg-legendary{
+    border-radius: 8px;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(209, 54, 246, 0.01) 0%, rgba(203, 32, 134, 0.08) 100%), #0A0A09;
+  }
+  .bg-uncommon{
+    border-radius: 8px;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(31, 182, 203, 0.08) 0%, rgba(0, 104, 163, 0.08) 100%), #0A0A09;
+  }
+  .bg-mythical{
+    border-radius: 8px;
+     background: radial-gradient(50% 50% at 50% 50%, rgba(253, 138, 23, 0.08) 0%, rgba(156, 6, 0, 0.08) 100%), #0A0A09;
+  }
+  .bg-common{
+    border-radius: 8px;
+    background: var(--Common, radial-gradient(50% 50% at 50% 50%, rgba(249, 255, 80, 0.08) 0%, rgba(255, 188, 0, 0.08) 100%), #0A0A09);
+  }
