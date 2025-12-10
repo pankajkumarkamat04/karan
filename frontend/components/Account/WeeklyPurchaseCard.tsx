@@ -71,7 +71,7 @@ export default function WeeklyPurchaseCard() {
         {hasHighValueProduct && (
           <div className="bg-yellow-500/20 border border-yellow-500/50 rounded p-3">
             <p className="text-yellow-400 text-sm">
-              ⚠️ You have purchased a high-value product (>₹2000) this week. Only one high-value product allowed per week.
+              ⚠️ You have purchased a high-value product (&gt;₹2000) this week. Only one high-value product allowed per week.
             </p>
           </div>
         )}

@@ -43,15 +43,21 @@ export class MobalegendsPaymentService {
       throw new BadRequestException('amount must be a valid number');
     }
 
+    // Normalize customer identity fields regardless of key casing
+    const customerName = dto.customerName || dto.name || 'Unknown';
+    const customerEmail = dto.customerEmail || dto.email || 'unknown@example.com';
+    const customerMobile = dto.customerMobile || dto.phone || '0000000000';
+    const customerAddress = dto.address || dto.customer_address || 'N/A';
+
     const payload = {
       apiKey: this.apiKey,
       amount: numericAmount,
       merchantName: dto.merchantName || 'Khemchand Kishinchand Chandani',
       upiId: dto.upiId || 'paytmqr6ie5mh@ptys',
       client_txn_id: transactionId,
-      customerName: dto.customerName,
-      customerEmail: dto.customerEmail,
-      customerMobile: dto.customerMobile,
+      customerName,
+      customerEmail,
+      customerMobile,
       redirectUrl: process.env.SUCCESS_REDIRECT_URL || 'http://localhost:3000/payment/success',  // Direct env usage
       pInfo: dto.pInfo || 'Order Payment',
       udf1: dto.udf1,
@@ -108,7 +114,7 @@ export class MobalegendsPaymentService {
       }
 
       // Comprehensive Ban Check
-      await this.checkIfUserIsBanned(dto.userId, dto.customerEmail, dto.customerMobile);
+      await this.checkIfUserIsBanned(dto.userId, customerEmail, customerMobile);
 
       // Get the highest product price for validation
       const maxProductPrice = paymentItemsData.length > 0
@@ -119,8 +125,8 @@ export class MobalegendsPaymentService {
         dto.userId,
         numericAmount,
         maxProductPrice,
-        dto.customerMobile,
-        dto.customerName,
+        customerMobile,
+        customerName,
       );
 
       if (!validation.canPurchase) {
@@ -134,10 +140,10 @@ export class MobalegendsPaymentService {
           amount: numericAmount,
           currency: 'INR',
           status: PaymentStatus.PENDING,
-          customer_name: dto.name || 'Unknown',
-          customer_email: dto.email || 'unknown@example.com',
-          customer_phone: dto.phone || '0000000000',
-          customer_address: dto.address || 'N/A',
+          customer_name: customerName,
+          customer_email: customerEmail,
+          customer_phone: customerMobile,
+          customer_address: customerAddress,
           description: dto.notes || 'N/A',
           notes: dto.udf1 || 'N/A',
           user_id: dto.userId || null,
@@ -156,9 +162,16 @@ export class MobalegendsPaymentService {
         message: 'Mobalegends payment initiated successfully',
       };
     } catch (err) {
-      // console.error('Mobalegends error body:', err.response?.data);
+      // Temporary debug logging to inspect gateway responses
+      // eslint-disable-next-line no-console
+      console.error('Mobalegends create payment error', {
+        status: err?.response?.status,
+        data: err?.response?.data,
+        message: err?.message,
+        url: `${this.baseUrl}/payments/create`,
+      });
       throw new BadRequestException(
-        err.response?.data?.message || err.message || 'Mobalegends error',
+        err?.response?.data?.message || err?.message || 'Mobalegends error',
       );
     }
   }
