@@ -162,14 +162,6 @@ export class MobalegendsPaymentService {
         message: 'Mobalegends payment initiated successfully',
       };
     } catch (err) {
-      // Temporary debug logging to inspect gateway responses
-      // eslint-disable-next-line no-console
-      console.error('Mobalegends create payment error', {
-        status: err?.response?.status,
-        data: err?.response?.data,
-        message: err?.message,
-        url: `${this.baseUrl}/payments/create`,
-      });
       throw new BadRequestException(
         err?.response?.data?.message || err?.message || 'Mobalegends error',
       );
