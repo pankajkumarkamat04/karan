@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import * as speakeasy from 'speakeasy';
 import * as QRCode from 'qrcode';
 import { PrismaClient } from '@prisma/client';
@@ -49,11 +49,11 @@ export class UserRepository {
         ucodes: true
       }
     });
-  
+
     if (!user) {
       return null;
     }
-  
+
     // Remove sensitive data
     const { password, ...result } = user;
     return result;
@@ -121,7 +121,7 @@ export class UserRepository {
           status: 1
         },
       });
-      
+
       if (user) {
         return user;
       } else {

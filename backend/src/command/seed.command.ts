@@ -1,7 +1,7 @@
 // external imports
 import { Command, CommandRunner } from 'nest-commander';
 import { StringHelper } from '../common/helper/string.helper';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 // internal imports
 import appConfig from '../config/app.config';
 import { UserRepository } from '../common/repository/user/user.repository';
@@ -19,21 +19,21 @@ export class SeedCommand extends CommandRunner {
   async seed(param: string[]) {
     try {
       console.log('Starting database seeding...');
-      
+
       // begin transaaction
       await this.prisma.$transaction(async ($tx) => {
         console.log('Creating roles...');
         await this.roleSeed($tx);
         console.log('Roles created successfully');
-        
+
         console.log('Creating permissions...');
         await this.permissionSeed($tx);
         console.log('Permissions created successfully');
-        
+
         console.log('Creating system admin user...');
         await this.userSeed($tx);
         console.log('System admin user created successfully');
-        
+
         console.log('Assigning permissions to roles...');
         await this.permissionRoleSeed($tx);
         console.log('Permissions assigned successfully');
@@ -50,7 +50,7 @@ export class SeedCommand extends CommandRunner {
   //---- user section ----
   async userSeed($tx?: any) {
     const prisma = $tx || this.prisma;
-    
+
     // Check if system user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email: appConfig().defaultUser.system.email },
@@ -58,13 +58,13 @@ export class SeedCommand extends CommandRunner {
 
     if (existingUser) {
       console.log('⚠️  System admin user already exists');
-      
+
       // Update password to match current SYSTEM_PASSWORD
       const hashedPassword = await bcrypt.hash(
         appConfig().defaultUser.system.password,
         appConfig().security.salt,
       );
-      
+
       await prisma.user.update({
         where: { id: existingUser.id },
         data: {
@@ -72,12 +72,12 @@ export class SeedCommand extends CommandRunner {
           first_name: appConfig().defaultUser.system.username,
         },
       });
-      
+
       console.log('✅ Password updated to match current SYSTEM_PASSWORD');
       console.log(`   Email: ${appConfig().defaultUser.system.email}`);
       console.log(`   Username: ${appConfig().defaultUser.system.username}`);
       console.log(`   Password: ${appConfig().defaultUser.system.password}`);
-      
+
       // Still assign role if not already assigned
       const existingRole = await prisma.roleUser.findFirst({
         where: {
@@ -85,7 +85,7 @@ export class SeedCommand extends CommandRunner {
           user_id: existingUser.id,
         },
       });
-      
+
       if (!existingRole) {
         await prisma.roleUser.create({
           data: {
@@ -101,9 +101,9 @@ export class SeedCommand extends CommandRunner {
     }
 
     // Validate environment variables
-    if (!appConfig().defaultUser.system.username || 
-        !appConfig().defaultUser.system.email || 
-        !appConfig().defaultUser.system.password) {
+    if (!appConfig().defaultUser.system.username ||
+      !appConfig().defaultUser.system.email ||
+      !appConfig().defaultUser.system.password) {
       throw new Error('Missing system user configuration. Please set SYSTEM_USERNAME, SYSTEM_EMAIL, and SYSTEM_PASSWORD in your .env file');
     }
 
@@ -120,7 +120,7 @@ export class SeedCommand extends CommandRunner {
         role_id: '1',
       },
     });
-    
+
     console.log(`✅ System admin user created:`);
     console.log(`   Email: ${appConfig().defaultUser.system.email}`);
     console.log(`   Username: ${appConfig().defaultUser.system.username}`);
@@ -129,7 +129,7 @@ export class SeedCommand extends CommandRunner {
 
   async permissionSeed($tx?: any) {
     const prisma = $tx || this.prisma;
-    
+
     // Check if permissions already exist
     const existingPermissions = await prisma.permission.findMany();
     if (existingPermissions.length > 0) {
@@ -192,7 +192,7 @@ export class SeedCommand extends CommandRunner {
 
   async permissionRoleSeed($tx?: any) {
     const prisma = $tx || this.prisma;
-    
+
     // Check if permission roles already exist
     const existingPermissionRoles = await prisma.permissionRole.findMany();
     if (existingPermissionRoles.length > 0) {
@@ -312,7 +312,7 @@ export class SeedCommand extends CommandRunner {
 
   async roleSeed($tx?: any) {
     const prisma = $tx || this.prisma;
-    
+
     // Check if roles already exist
     const existingRoles = await prisma.role.findMany();
     if (existingRoles.length > 0) {
